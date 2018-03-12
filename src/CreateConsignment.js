@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import { env } from './config/env';
 
 class CreateConsignment extends React.Component {
 
@@ -17,13 +16,13 @@ class CreateConsignment extends React.Component {
   }
 
   componentWillMount() {
-    fetch(env.apiEndpoint, {
+    fetch(`http://localhost:8080/rpc`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        service: 'mig.consignment',
+        service: 'shippy.consignment',
         method: 'ConsignmentService.Get',
         request: {},
       })
@@ -38,13 +37,13 @@ class CreateConsignment extends React.Component {
 
   create = () => {
     const consignment = this.state;
-    fetch(env.apiEndpoint, {
+    fetch(`http://localhost:8080/rpc`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          service: 'mig.consignment',
+        service: 'shippy.consignment',
         method: 'ConsignmentService.Create',
         request: _.omit(consignment, 'created', 'consignments'),
       }),
