@@ -1,21 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CreateConsignment from './CreateConsignment';
+import Authenticate from './Authenticate';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+
+    state = {
+        err: null,
+        authenticate: false,
+    }
+
+    onAuth = (token) => {
+        this.setState({
+            authenticated: true,
+        });
+    }
+
+    renderLogin = () => <Authenticate onAuth={this.onAuth} />
+
+    renderAuthenticated = () => <CreateConsignment />
+
+    getToken = () => {
+        return localStorage.getItem('token') || false;
+    }
+
+    isAuthenticated = () => {
+        return this.state.authenticated || this.getToken() || false;
+    }
+
+    render() {
+        const authenticated = this.isAuthenticated();
+        return (
+            <div className="App">
+            <div className="App-header">
+            <h2>Shippy</h2>
+            </div>
+            <div className='app-intro container'>
+            {(authenticated ? this.renderAuthenticated() : this.renderLogin())}
+            </div>
+            </div>
+        );
+    }
 }
 
 export default App;
