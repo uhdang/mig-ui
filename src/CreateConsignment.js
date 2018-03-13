@@ -22,7 +22,7 @@ class CreateConsignment extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        service: 'shippy.consignment',
+        service: 'mig.consignment',
         method: 'ConsignmentService.Get',
         request: {},
       })
@@ -43,7 +43,7 @@ class CreateConsignment extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        service: 'shippy.consignment',
+        service: 'mig.consignment',
         method: 'ConsignmentService.Create',
         request: _.omit(consignment, 'created', 'consignments'),
       }),

@@ -24,7 +24,7 @@ class Authenticate extends React.Component {
           email: this.state.email,
           password: this.state.password,
         },
-        service: 'shippy.auth',
+        service: 'mig.auth',
         method: 'Auth.Auth',
       }),
     })
@@ -52,7 +52,7 @@ class Authenticate extends React.Component {
           name: this.state.name,
         },
         method: 'Auth.Create',
-        service: 'shippy.auth',
+        service: 'mig.auth',
       }),
     })
     .then((res) => res.json())
